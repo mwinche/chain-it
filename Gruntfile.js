@@ -8,8 +8,18 @@ module.exports = function (grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
-		nodeunit: {
-			files: ['test/**/*_test.js']
+		jasmine_node: {
+			coverage: {
+
+			},
+			options: {
+				forceExit: true,
+				match: '.',
+				matchall: false,
+				extensions: 'js',
+				specNameMatcher: 'spec',
+				captureExceptions: true
+			}
 		},
 		jshint: {
 			options: {
@@ -43,5 +53,5 @@ module.exports = function (grunt) {
 	});
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'nodeunit']);
+	grunt.registerTask('default', ['jshint', 'jasmine_node']);
 };
