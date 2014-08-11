@@ -1,0 +1,43 @@
+{
+	"name": "chain-link",
+	"version": "0.0.0",
+	"main": "lib/chain-link.js",
+	"description": "Allows defining multiple modules with lazy asset generation and then either requesting assets via the CLI or starting up a resource server (HTTP)",
+	"homepage": "https://github.com/mwinche/chain-link",
+	"bugs": "https://github.com/mwinche/chain-link/issues",
+	"author": {
+		"name": "Matt Winchester",
+		"email": "m_winche@yahoo.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mwinche/chain-link"
+	},
+	"license": "MIT",
+	"files": [
+		"lib"
+	],
+	"keywords": [
+		"chain-link",
+		"lazy assets",
+		"build",
+		"build systems",
+		"resource chain"
+	],
+	"devDependencies": {
+		"grunt-contrib-jshint": "^0.10.0",
+		"grunt-contrib-nodeunit": "^0.3.3",
+		"grunt-contrib-watch": "^0.6.1",
+		"load-grunt-tasks": "^0.4.0",
+		"time-grunt": "^0.3.1",
+		"jshint-stylish": "^0.2.0",
+		"grunt-jasmine-node-coverage": "^0.1.11"
+	},
+	"scripts": {
+		"test": "grunt"
+	},
+	"bin": {
+		"chain-link": "cli.js"
+	},
+	"preferGlobal": "true"
+}
