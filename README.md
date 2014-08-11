@@ -25,7 +25,7 @@ $ chain-link --version
 
 ## Documentation
 
-_(Coming soon)_
+The goal of this project is to build a lightweight HTTP server which serves up assets generated on the fly using Gulp plugins.
 
 
 ## Examples
