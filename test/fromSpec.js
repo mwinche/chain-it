@@ -17,7 +17,5 @@ describe('from', function(){
 				from.src(1,2);
 			}).toThrow();
 		});
-
-		describe('');
 	});
 });
