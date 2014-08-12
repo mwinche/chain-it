@@ -1,7 +1,7 @@
 {
   "name": "chain-link",
   "version": "0.0.0",
-  "main": "lib/chain-link.js",
+  "main": "lib/chain.js",
   "description": "Allows defining multiple modules with lazy asset generation and then either requesting assets via the CLI or starting up a resource server (HTTP)",
   "homepage": "https://github.com/mwinche/chain-link",
   "bugs": "https://github.com/mwinche/chain-link/issues",
