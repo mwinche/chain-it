@@ -1,4 +1,5 @@
-var from = require('../lib/from');
+var from = require('../lib/from'),
+	Source = require('../lib/source');
 
 describe('from', function(){
 	describe('src function', function(){
@@ -16,6 +17,12 @@ describe('from', function(){
 			expect(function(){
 				from.src(1,2);
 			}).toThrow();
+		});
+
+		describe('return value', function(){
+			it('should be a Source instance', function(){
+				expect(from.src('{1}.js').constructor).toBe(Source);
+			});
 		});
 	});
 });
