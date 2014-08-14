@@ -72,6 +72,14 @@ describe('Resource chain', function(){
 				expect(retVal.resolve()).toBe('theme/styles/dark.less');
 			});
 
+			it('should have a resolve method that resolves', function(){
+				chain.resource('/{dir}.js', new Source(['{dir}/file1.js', '{dir}/file2.js']));
+
+				retVal = chain.get('/typeahead.js');
+
+				expect(retVal.resolve()).toEqual(['typeahead/file1.js', 'typeahead/file2.js']);
+			});
+
 			it('should have a source method', function(){
 				expect(typeof retVal.source).toBe('function');
 			});
