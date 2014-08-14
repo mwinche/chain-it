@@ -44,6 +44,21 @@ describe('Source "class"', function(){
 				1: 'widgets'
 			})).toBe('styles/widgets.less');
 		});
+
+		it('should allow for arrays of sources', function(){
+			source = new Source(['file1.js', 'file2.js', 'file3.js']);
+
+			expect(source.resolve({})).toEqual(['file1.js', 'file2.js', 'file3.js']);
+		});
+
+		it('should transform contents of arrays', function(){
+			source = new Source(['{dir}/{file}.js', '{dir}/{file}.css']);
+
+			expect(source.resolve({
+				dir: 'src',
+				file: 'widget'
+			})).toEqual(['src/widget.js', 'src/widget.css']);
+		});
 	});
 
 	describe('pipe method', function(){

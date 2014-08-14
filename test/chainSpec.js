@@ -1,4 +1,5 @@
-var chain = require('../lib/chain');
+var chain = require('../lib/chain'),
+	Source = require('../lib/source');
 
 describe('Resource chain', function(){
 	it('should be a function', function(){
@@ -20,6 +21,17 @@ describe('Resource chain', function(){
 
 		it('should be a function', function(){
 			expect(typeof chainObj.resource).toBe('function');
+		});
+
+		it('should allow chaining', function(){
+			expect(chainObj.resource()).toBe(chainObj);
+		});
+
+		it('should register a new path', function(){
+			var source = new Source('path.png');
+			chainObj.resource('/path', source);
+
+			expect(chainObj.paths['/path']).toBe(source);
 		});
 	});
 });
