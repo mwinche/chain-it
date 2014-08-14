@@ -37,10 +37,10 @@ describe('Source "class"', function(){
 		});
 
 		it('should replace {x} expressions with their respective values', function(){
-			source = new Source('{2}/{1}.less');
+			source = new Source('{dir}/{1}.less');
 
 			expect(source.resolve({
-				2: 'styles',
+				dir: 'styles',
 				1: 'widgets'
 			})).toBe('styles/widgets.less');
 		});
