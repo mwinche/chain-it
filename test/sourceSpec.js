@@ -45,4 +45,23 @@ describe('Source "class"', function(){
 			})).toBe('styles/widgets.less');
 		});
 	});
+
+	describe('pipe method', function(){
+		it('should exist', function(){
+			expect(typeof source.pipe).toBe('function');
+		});
+
+		it('should return this (enable chaining)', function(){
+			expect(source.pipe()).toBe(source);
+		});
+
+		it('should add the transform to a list of transforms', function(){
+			source
+				.pipe(1)
+				.pipe(2)
+				.pipe(3);
+
+			expect(source.transforms).toEqual([1,2,3]);
+		});
+	});
 });
