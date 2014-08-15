@@ -5,23 +5,7 @@
 
 ## Getting Started
 
-Install the module with: `npm install chain-link`
-
-```js
-var chain-link = require('chain-link');
-chain-link.awesome(); // "awesome"
-```
-
-Install with cli command
-
-```sh
-$ npm install -g chain-link
-$ chain-link --help
-$ chain-link --version
-```
-
-
-
+More to come once published to npm.
 
 ## Documentation
 
@@ -30,7 +14,34 @@ The goal of this project is to build a lightweight HTTP server which serves up a
 
 ## Examples
 
-_(Coming soon)_
+Sample `chain.js`:
+
+	var chain = require('chain-link')(),
+		less = require('gulp-less'),
+		tracuer = require('gulp-tracuer'),
+		uglify = require('gulp-uglify'),
+		sourcemaps = require('gulp-sourcemaps'),
+		concat = require('gulp-concat'),
+		from = chain.from;
+	
+	module.exports = chain
+		.resource("/{1}.css",
+			from.src('{1}.less')
+				.pipe(sourcemaps.init())
+				.pipe(less())
+				.pipe(sourcemaps.write())
+		)
+		.resource("/raw/{1}.js",
+			from.src("{1}.js")
+				.pipe(sourcemaps.init())
+				.pipe(tracuer())
+				.pipe(uglify())
+				.pipe(sourcemaps.write())
+		)
+		.resource("/superMegaFile.js",
+			from.resource(["/raw/test.js", "/raw/test2.js"])
+				.pipe(concat())
+		);
 
 
 ## Contributing

@@ -1,5 +1,6 @@
 var createChain = require('../lib/chain'),
-	Source = require('../lib/source');
+	Source = require('../lib/source'),
+	From = require('../lib/from');
 
 describe('Resource chain', function(){
 	it('should be a function', function(){
@@ -10,6 +11,12 @@ describe('Resource chain', function(){
 		var one = createChain(), two = createChain();
 
 		expect(one).not.toBe(two);
+	});
+
+	it('should have a from object tied to the chain instance', function(){
+		var chain = createChain();
+
+		expect(chain.from.constructor).toBe(From);
 	});
 
 	describe('resource method', function(){
@@ -51,6 +58,15 @@ describe('Resource chain', function(){
 
 		it('should exist', function(){
 			expect(typeof chain.get).toBe('function');
+		});
+
+		it('should propagate to other resources if the source is from a resource', function(){
+			var rootSource = chain.from.src('image.png');
+
+			chain.resource('/foo', chain.from.resource('/bar'));
+			chain.resource('/bar', rootSource);
+
+			expect(chain.get('/foo').source()).toBe(rootSource);
 		});
 
 		describe('return value', function(){
