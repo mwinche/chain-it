@@ -79,4 +79,25 @@ describe('Source "class"', function(){
 			expect(source.transforms).toEqual([1,2,3]);
 		});
 	});
+
+	describe('compile method', function(){
+		beforeEach(function(){
+			source = (new Source('test.less'))
+				.pipe(1)
+				.pipe(2)
+				.pipe(3);
+		});
+
+		it('should pass plugins through to the src\'s pipe method in order', function(){
+			var spy = jasmine.createSpyObj('gulp-src', ['pipe']);
+			spy.pipe.andReturn(spy);
+
+			source.compile(spy);
+
+			expect(spy.pipe.calls.length).toBe(3);
+			expect(spy.pipe.calls[0].args).toEqual([1]);
+			expect(spy.pipe.calls[1].args).toEqual([2]);
+			expect(spy.pipe.calls[2].args).toEqual([3]);
+		});
+	});
 });
