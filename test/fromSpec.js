@@ -1,5 +1,6 @@
-var from = require('../lib/from'),
-	Source = require('../lib/source');
+var From = require('../lib/from'),
+	Source = require('../lib/source'),
+	from = new From();
 
 describe('from', function(){
 	describe('src function', function(){
