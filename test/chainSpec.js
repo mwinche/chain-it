@@ -1,5 +1,4 @@
 var createChain = require('../lib/chain'),
-	Source = require('../lib/source'),
 	From = require('../lib/from');
 
 describe('Resource chain', function(){
@@ -35,7 +34,7 @@ describe('Resource chain', function(){
 		});
 
 		it('should register a new path', function(){
-			var source = new Source('path.png');
+			var source = chain.from.src('path.png');
 			chain.resource('/path', source);
 
 			expect(chain.paths['/path']).toBe(source);
@@ -43,7 +42,7 @@ describe('Resource chain', function(){
 
 		it('should setup match keys', function(){
 			var path = '/{1}/{2}/{file}.js';
-			chain.resource(path, new Source('{file}.js'));
+			chain.resource(path, chain.from.src('{file}.js'));
 
 			expect(chain.pathKeys[path]).toEqual(['1', '2', 'file']);
 		});
@@ -74,22 +73,22 @@ describe('Resource chain', function(){
 
 			beforeEach(function(){
 				chain = createChain();
-				source = new Source('test.js');
+				source = chain.from.src('test.js');
 
 				chain.resource('/test.js', source);
 				retVal = chain.get('/test.js');
 			});
 
 			it('should have a resolve method that resolves', function(){
-				chain.resource('/{dir}/{file}.css', new Source('{dir}/styles/{file}.less'));
+				chain.resource('/{dir}/{file}.css', chain.from.src('{dir}/styles/{file}.less'));
 
 				retVal = chain.get('/theme/dark.css');
 
 				expect(retVal.resolve()).toBe('theme/styles/dark.less');
 			});
 
-			it('should have a resolve method that resolves', function(){
-				chain.resource('/{dir}.js', new Source(['{dir}/file1.js', '{dir}/file2.js']));
+			it('should have a resolve method that resolves an array of sources', function(){
+				chain.resource('/{dir}.js', chain.from.src(['{dir}/file1.js', '{dir}/file2.js']));
 
 				retVal = chain.get('/typeahead.js');
 
@@ -119,16 +118,16 @@ describe('Resource chain', function(){
 			});
 
 			it('should return the source based on patterns', function(){
-				source = new Source('{1}.less');
+				source = chain.from.src('{1}.less');
 
 				chain.resource('/{1}.css', source);
-					retVal = chain.get('/foo.css');
+				retVal = chain.get('/foo.css');
 
-					expect(retVal.source()).toBe(source);
+				expect(retVal.source()).toBe(source);
 			});
 
 			it('should match patterns', function(){
-				chain.resource('/{1}/{2}.css', new Source('{1}/{2}.less'));
+				chain.resource('/{1}/{2}.css', chain.from.src('{1}/{2}.less'));
 				retVal = chain.get('/path/thing/foo.css');
 
 				expect(retVal.match()).toEqual({
