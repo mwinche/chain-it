@@ -1,4 +1,4 @@
-# chain-link [![Build Status](https://secure.travis-ci.org/mwinche/chain-link.png?branch=master)](http://travis-ci.org/mwinche/chain-link)
+# chain-it [![Build Status](https://secure.travis-ci.org/mwinche/chain-link.png?branch=master)](http://travis-ci.org/mwinche/chain-link)
 
 > Allows defining multiple modules with lazy asset generation and then either requesting assets via the CLI or starting up a resource server (HTTP)
 
@@ -16,7 +16,7 @@ The goal of this project is to build a lightweight HTTP server which serves up a
 
 Sample `chain.js`:
 
-	var chain = require('chain-link')(),
+	var chain = require('chain-it')(),
     	less = require('gulp-less'),
     	tracuer = require('gulp-traceur'),
     	uglify = require('gulp-uglify'),
