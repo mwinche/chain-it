@@ -1,4 +1,4 @@
-# chain-it [![Build Status](https://secure.travis-ci.org/mwinche/chain-link.png?branch=master)](http://travis-ci.org/mwinche/chain-link)
+# chain-it [![Build Status](https://secure.travis-ci.org/mwinche/chain-it.png?branch=master)](http://travis-ci.org/mwinche/chain-it)
 
 > Allows defining multiple modules with lazy asset generation and then either requesting assets via the CLI or starting up a resource server (HTTP)
 
