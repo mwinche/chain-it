@@ -71,33 +71,69 @@ describe('Source "class"', function(){
 		});
 
 		it('should add the transform to a list of transforms', function(){
-			source
-				.pipe(1)
-				.pipe(2)
-				.pipe(3);
+			var spy1 = jasmine.createSpy('one'),
+				spy2 = jasmine.createSpy('two');
 
-			expect(source.transforms).toEqual([1,2,3]);
+			spy1.andReturn(1);
+			spy2.andReturn(2);
+
+			source
+				.pipe(spy1)
+				.pipe(spy2);
+
+			expect(source.transforms[0]()).toEqual(1);
+			expect(source.transforms[1]()).toEqual(2);
 		});
 	});
 
 	describe('compile method', function(){
+		var transforms, spy;
+
 		beforeEach(function(){
+			spy = jasmine.createSpyObj('gulp-src', ['pipe']);
+			spy.pipe.andReturn(spy);
+
+			transforms = [
+				jasmine.createSpy('first'),
+				jasmine.createSpy('second'),
+				jasmine.createSpy('third')
+			];
+
 			source = (new Source('test.less'))
-				.pipe(1)
-				.pipe(2)
-				.pipe(3);
+				.pipe(transforms[0], {'config-option': 'value'})
+				.pipe(transforms[1], {'key': '{token}'})
+				.pipe(transforms[2], '{token}Dir', 'value', 3);
 		});
 
 		it('should pass plugins through to the src\'s pipe method in order', function(){
-			var spy = jasmine.createSpyObj('gulp-src', ['pipe']);
-			spy.pipe.andReturn(spy);
+			transforms[0].andReturn(0);
+			transforms[1].andReturn(1);
+			transforms[2].andReturn(2);
 
 			source.compile(spy);
 
 			expect(spy.pipe.calls.length).toBe(3);
-			expect(spy.pipe.calls[0].args).toEqual([1]);
-			expect(spy.pipe.calls[1].args).toEqual([2]);
-			expect(spy.pipe.calls[2].args).toEqual([3]);
+			expect(spy.pipe.calls[0].args).toEqual([0]);
+			expect(spy.pipe.calls[1].args).toEqual([1]);
+			expect(spy.pipe.calls[2].args).toEqual([2]);
+		});
+
+		it('should pass arguments in to transforms', function(){
+			source.compile(spy);
+
+			expect(transforms[0].calls[0].args).toEqual([{'config-option':'value'}]);
+		});
+
+		it('should pass arguments in to transforms', function(){
+			source.compile(spy, {token: 'thing'}, ['token']);
+
+			expect(transforms[1].calls[0].args).toEqual([{'key':'thing'}]);
+		});
+
+		it('should pass arguments in to transforms', function(){
+			source.compile(spy, {token: 'that'}, ['token']);
+
+			expect(transforms[2].calls[0].args).toEqual(['thatDir', 'value', 3]);
 		});
 	});
 });
