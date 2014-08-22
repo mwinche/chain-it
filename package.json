@@ -34,13 +34,5 @@
   },
   "scripts": {
     "test": "grunt"
-  },
-  "bin": {
-    "chain-it": "cli.js"
-  },
-  "preferGlobal": "true",
-  "dependencies": {
-    "express": "4.8.5",
-    "gulp": "3.8.7"
   }
 }

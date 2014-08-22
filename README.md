@@ -11,6 +11,8 @@ More to come once published to npm.
 
 The goal of this project is to build a lightweight HTTP server which serves up assets generated on the fly using Gulp plugins.
 
+See the chain-it-cli for the CLI for this library.
+
 
 ## Examples
 
