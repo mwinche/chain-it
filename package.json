@@ -1,6 +1,6 @@
 {
   "name": "chain-it",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/chain.js",
   "description": "Allows defining multiple modules with lazy asset generation and then either requesting assets via the CLI or starting up a resource server (HTTP)",
   "homepage": "https://github.com/mwinche/chain-it",
