@@ -95,6 +95,19 @@ describe('Resource chain', function(){
 				expect(retVal.resolve()).toEqual(['typeahead/file1.js', 'typeahead/file2.js']);
 			});
 
+			it('should have a keys method', function(){
+				expect(typeof retVal.keys).toBe('function');
+			});
+
+			it('should have a keys method which returns matched keys', function(){
+				chain
+					.resource('/{dir}/{file}.{extension}', chain.from.src('src/{dir}/{file}.{extension}'));
+
+				retVal = chain.get('/app/app.js');
+
+				expect(retVal.keys()).toEqual(['dir', 'file', 'extension']);
+			});
+
 			it('should have a source method', function(){
 				expect(typeof retVal.source).toBe('function');
 			});

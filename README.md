@@ -17,31 +17,28 @@ The goal of this project is to build a lightweight HTTP server which serves up a
 Sample `chain.js`:
 
 	var chain = require('chain-link')(),
-		less = require('gulp-less'),
-		tracuer = require('gulp-tracuer'),
-		uglify = require('gulp-uglify'),
-		sourcemaps = require('gulp-sourcemaps'),
-		concat = require('gulp-concat'),
-		from = chain.from;
-	
-	module.exports = chain
-		.resource("/{1}.css",
-			from.src('{1}.less')
-				.pipe(sourcemaps.init())
-				.pipe(less())
-				.pipe(sourcemaps.write())
-		)
-		.resource("/raw/{1}.js",
-			from.src("{1}.js")
-				.pipe(sourcemaps.init())
-				.pipe(tracuer())
-				.pipe(uglify())
-				.pipe(sourcemaps.write())
-		)
-		.resource("/superMegaFile.js",
-			from.resource(["/raw/test.js", "/raw/test2.js"])
-				.pipe(concat())
-		);
+    	less = require('gulp-less'),
+    	tracuer = require('gulp-traceur'),
+    	uglify = require('gulp-uglify'),
+    	concat = require('gulp-concat'),
+    	from = chain.from;
+    
+    module.exports = chain
+    	.resource("/{file}.css",
+    		from.src('{file}.less')
+    			.pipe(less)
+    	)
+    	.resource("/raw/{1}.js",
+    		from.src("{1}.js")
+    			.pipe(tracuer)
+    			.pipe(uglify)
+    	)
+    	.resource("/superMegaFile.js",
+    		from.src(["test.js", "test2.js"])
+    			.pipe(uglify)
+    			.pipe(concat, 'superMegaFile.js')
+    	);
+
 
 
 ## Contributing
