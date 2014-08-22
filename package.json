@@ -38,5 +38,9 @@
   "bin": {
     "chain-link": "cli.js"
   },
-  "preferGlobal": "true"
+  "preferGlobal": "true",
+  "dependencies": {
+    "express": "^4.8.5",
+    "gulp": "^3.8.7"
+  }
 }
